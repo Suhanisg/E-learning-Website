@@ -5,11 +5,11 @@ dotenv.config();
 
 const app = express();
 
-const port =5000;
+const port = Number(process.env.PORT) || 3000;
 
 app.get('/', (req, res) => {
     res.send('Welcome to the server!');
-})
+});
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
