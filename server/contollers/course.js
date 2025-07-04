@@ -88,6 +88,8 @@ export const paymentVerification=TryCatch(async (req, res) => {
     razorpay_payment_id,
     razorpay_signature} =req.body;
 
+    console.log("💳 Payment details received:", req.body);
+
     const body=razorpay_order_id + "|" + razorpay_payment_id;
     const expectedSignature=crypto.createHmac("sha256",process.env.RAZORPAY_SECRET)
     .update(body)
@@ -105,9 +107,9 @@ export const paymentVerification=TryCatch(async (req, res) => {
         user.subscription.push(course._id);
 
         await user.save();
-        res.status(200).json({
-            message:"Course Purchased",
-        })
+        res.redirect(`http://localhost:5173/payment-success/${razorpay_payment_id}`);
+
+
 
     }else{
         res.status(400).json({
