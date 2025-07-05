@@ -33,6 +33,10 @@ const schema=new mongoose.Schema({
         type:Date,
         default:Date.now,
     },
+    lectures: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Lecture",
+    }],
 });
 
 export  const Courses = mongoose.model("Courses",schema);

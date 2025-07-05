@@ -6,6 +6,7 @@ import {User} from '../models/User.js';
 import crypto from "crypto";
 import {Payment} from '../models/Payment.js'
 
+
 export const getAllCourses=TryCatch(async (req, res) => {
     const courses = await Courses.find();
     res.json({
@@ -13,12 +14,11 @@ export const getAllCourses=TryCatch(async (req, res) => {
     });
 });
 
-export const getSingleCourse=TryCatch(async (req, res) => {
-    const course = await Courses.findById(req.params.id);
-    res.json({
-        course,
-    })
-})
+export const getSingleCourse = TryCatch(async (req, res) => {
+    const course = await Courses.findById(req.params.id)
+    res.json({ course });
+});
+
 
 export const getAllLectures=TryCatch(async (req, res) => {
     const lectures=await Lecture.find({course:req.params.id});
@@ -44,7 +44,7 @@ export const getAllLecture=TryCatch(async (req, res) => {
     if(user.role==="admin"){
         return res.json({lecture});
     }
-    if(!user.subscription.includes(req.params.id)){
+    if(!user.subscription.includes(lecture.course)){
         return res.status(400).json({
             message:"You have not subscribed to this course",
         });
