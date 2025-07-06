@@ -15,4 +15,11 @@
         justify-content: center;
         gap:30px;
     }
+
+}
+.section-heading {
+    font-size: 25px;
+    color: #46024c;
+    text-align: left;
+    padding-left: 20px;
 }

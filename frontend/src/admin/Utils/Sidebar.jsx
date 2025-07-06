@@ -9,7 +9,7 @@ const Sidebar = () => {
         <div className="sidebar">
             <ul>
                 <li>
-                    <Link to="/admin/dashboard">
+                    <Link to={"/admin/dashboard"}>
                         <div className="icon">
                             <AiFillHome/>
                         </div>
@@ -18,7 +18,7 @@ const Sidebar = () => {
                 </li>
 
                 <li>
-                    <Link to="/admin/course">
+                    <Link to={"/admin/course"}>
                         <div className="icon">
                             <FaBook/>
                         </div>
@@ -27,7 +27,7 @@ const Sidebar = () => {
                 </li>
 
                 <li>
-                    <Link to="/admin/users">
+                    <Link to={"/admin/users"}>
                         <div className="icon">
                             <FaUserAlt/>
                         </div>
@@ -36,7 +36,7 @@ const Sidebar = () => {
                 </li>
 
                 <li>
-                    <Link to="/admin/course">
+                    <Link to={"/account"}>
                         <div className="icon">
                             <AiOutlineLogout/>
                         </div>

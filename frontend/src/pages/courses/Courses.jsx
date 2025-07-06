@@ -16,6 +16,7 @@ const Courses=()=>{
                     )):<p>No Courses Yet! </p>
                 }
             </div>
+
         </div>
     )
 }

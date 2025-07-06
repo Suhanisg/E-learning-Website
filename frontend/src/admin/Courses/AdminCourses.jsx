@@ -4,9 +4,13 @@ import {useNavigate} from "react-router-dom";
 import {CourseData} from "../../context/CourseContext.jsx";
 import CourseCard from "../../components/coursecard/CourseCard.jsx";
 import "./AdminCourses.css";
+import axios from "axios";
+import toast from "react-hot-toast";
+import {server} from "../../main";
 
 const categories =[
     "Web Development",
+    "Programming",
     "App Development",
     "Game Development",
     "Data Science",
@@ -35,9 +39,46 @@ const AdminCourses=({user}) =>{
             setImagePreview(reader.result);
             setImage(file);
         }
-    }
+    };
 
     const {courses,fetchCourses} =CourseData();
+    const submitHandler= async (e)=>{
+        e.preventDefault();
+        setBtnLoading(true);
+
+        const myForm = new FormData();
+        myForm.append("title", title);
+        myForm.append("description", description);
+        myForm.append("category", category);
+        myForm.append("price", price);
+        myForm.append("createdBy", createdBy);
+        myForm.append("duration", duration);
+        myForm.append("file", image);
+
+        try{
+            const {data}=await axios.post(`${server}/api/course/new`, myForm,{
+                headers:{
+                    token:localStorage.getItem("token"),
+                }
+            });
+            toast.success(data.message);
+            setBtnLoading(false);
+            await fetchCourses();
+            setImage("");
+            setTitle("");
+            setDescription("");
+            setDuration("");
+            setImagePreview("");
+            setCreatedBy("");
+            setPrice("");
+            setCategory("");
+
+        }catch(error){
+            toast.error(error.response.data.message);
+
+        }
+    }
+
     return (
         <Layout>
             <div className="admin-courses">
@@ -55,7 +96,7 @@ const AdminCourses=({user}) =>{
                     <div className="add-course">
                         <div className="course-form">
                             <h2>Add Course</h2>
-                            <form>
+                            <form onSubmit={submitHandler}>
                                 <label htmlFor="text">Title</label>
                                 <input
                                     type="text"

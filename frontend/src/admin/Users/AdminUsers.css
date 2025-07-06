@@ -1,0 +1,21 @@
+.users {
+    width: 100%;
+    margin: 20px auto;
+    min-height: 80vh;
+    border: solid gray 1px;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Make table take full width and fix columns */
+.users table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* This ensures equal column widths */
+}
+
+.users th, .users td {
+    border: 1px solid gray;
+    padding: 8px;
+    text-align: left;
+    word-wrap: break-word;
+}
